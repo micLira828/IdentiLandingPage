@@ -137,24 +137,21 @@
       <div class="container">
         <h2 id="contact-title" class="h2">Let’s begin</h2>
         <p class="lead">Every brand begins with a story — let’s tell yours beautifully. Send a note and I’ll reply with next steps.</p>
-        <form class="contact-form" aria-label="Contact form" action="#" method="post" onsubmit="return false;">
-          <div class="form-grid">
-            <label class="field">
-              <span>Name</span>
-              <input type="text" name="name" placeholder="Your name" required>
-            </label>
-            <label class="field">
-              <span>Email</span>
-              <input type="email" name="email" placeholder="you@example.com" required>
-            </label>
-          </div>
-          <label class="field">
-            <span>Message</span>
-            <textarea name="message" rows="5" placeholder="Tell me about your vision…"></textarea>
-          </label>
-          <button class="btn" type="submit">Send</button>
-          <p class="tiny">This demo form does not send email. Connect it to your email service or a form tool (e.g., Tally, Typeform, Netlify Forms) when you publish.</p>
-        </form>
+     <form
+  action="https://formspree.io/f/myzlzwjn"
+  method="POST"
+>
+  <label>
+    Your email:
+    <input type="email" name="email">
+  </label>
+  <label>
+    Your message:
+    <textarea name="message"></textarea>
+  </label>
+  <!-- your other form fields go here -->
+  <button type="submit">Send</button>
+</form>
       </div>
     </section>
   </main>
@@ -167,6 +164,27 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+  // Handle Formspree success message gracefully
+  document.querySelector('.contact-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const data = new FormData(form);
+
+    const response = await fetch(form.action, {
+      method: form.method,
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (response.ok) {
+      form.reset();
+      form.querySelector('.success-message').style.display = 'block';
+    } else {
+      alert("There was an issue sending your message. Please try again.");
+    }
+  });
+</script>
 </body>
 </html>
