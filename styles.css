@@ -1,4 +1,7 @@
-/* ====== Base ====== */
+/* ======================================== */
+/*                 ROOT VARIABLES           */
+/* ======================================== */
+
 :root{
   --bg-deep: #0f1a14;
   --bg-forest: #12251c;
@@ -13,12 +16,17 @@
   --radius: 14px;
 }
 
+/* ======================================== */
+/*                 BASE RESET               */
+/* ======================================== */
+
 *{box-sizing:border-box}
 html,body{height:100%}
 html{scroll-behavior:smooth}
+
 body{
   margin:0;
-  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial;
   line-height:1.6;
   color:var(--fg);
   background: radial-gradient(1200px 600px at 20% -10%, #1a3428 0%, transparent 70%),
@@ -28,12 +36,26 @@ body{
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* ======================================== */
+/*              GLOBAL CONTAINER            */
+/* ======================================== */
+
 .container{
   width:100%;
   max-width:var(--maxw);
   margin-inline:auto;
-  padding: clamp(16px, 4vw, 32px);
+  padding-inline: clamp(16px, 4vw, 32px);
 }
+
+/* Apply container centering to any section with a .container wrapper */
+section > .container,
+.section > .container {
+  margin-inline: auto;
+}
+
+/* ======================================== */
+/*                   TYPOGRAPHY             */
+/* ======================================== */
 
 .h2{
   font: 400 clamp(1.6rem, 3.5vw, 2.2rem) "Marcellus", serif;
@@ -47,13 +69,22 @@ body{
   color:var(--fg);
 }
 
-.lead{color:var(--muted); font-size:clamp(1.025rem,2vw,1.125rem)}
+.lead{
+  color:var(--muted);
+  font-size:clamp(1.025rem,2vw,1.125rem);
+  max-width: 90%;
+  margin-inline: auto;
+}
+
 .note{color:var(--muted); font-size:.95rem; margin-top:.75rem}
 .tiny{color:var(--muted); font-size:.85rem}
 
 .brand{color:var(--accent)}
 
-/* ====== Header ====== */
+/* ======================================== */
+/*                 HEADER                   */
+/* ======================================== */
+
 .site-header{
   position:relative;
   padding-top: clamp(56px, 8vh, 96px);
@@ -87,12 +118,10 @@ body{
   font-style: italic;
 }
 
-.scroll-indicator{
-  position:absolute; inset:auto 0 12px 0; text-align:center; opacity:.7;
-}
-.scroll-indicator span{ font-size: 26px; letter-spacing:2px }
+/* ======================================== */
+/*            BACKGROUND DECORATION         */
+/* ======================================== */
 
-/* Stars background */
 .stars{
   pointer-events:none;
   position:absolute; inset:0;
@@ -112,14 +141,14 @@ body{
   pointer-events:none;
 }
 @keyframes twinkle{
-  0%,100%{opacity:.35}
+  0%,100{opacity:.35}
   50%{opacity:.6}
 }
-@media (prefers-reduced-motion: reduce){
-  .stars{animation:none}
-}
 
-/* ====== Buttons & Links ====== */
+/* ======================================== */
+/*                BUTTONS                   */
+/* ======================================== */
+
 .btn{
   display:inline-block;
   padding:.75rem 1rem;
@@ -132,20 +161,35 @@ body{
   box-shadow: 0 6px 18px var(--shadow);
 }
 .btn:hover{ transform: translateY(-1px); }
-.btn:focus-visible{ outline:3px solid var(--ring); outline-offset:2px }
 .btn-outline{
   background: transparent;
   border-color: rgba(217,195,134,.5);
 }
 
-/* ====== Grid & Cards ====== */
-.section{ padding: clamp(40px, 8vh, 96px) 0 }
+/* ======================================== */
+/*           SECTION SPACING                */
+/* ======================================== */
+
+.section{
+  padding: clamp(48px, 10vh, 120px) 0;
+}
+
+/* ======================================== */
+/*              GRID + CARDS                */
+/* ======================================== */
+
 .grid{
   display:grid;
   gap: clamp(16px, 2.6vw, 24px);
 }
-.grid.trio{ grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) }
-.grid.duo{ grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) }
+
+.grid.trio{
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.grid.duo{
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
 
 .card{
   background: linear-gradient(180deg, var(--card), var(--card-2));
@@ -155,64 +199,94 @@ body{
   box-shadow: 0 10px 30px var(--shadow);
 }
 
-.card--accent{
-  border-color: rgba(217,195,134,.25);
-  box-shadow: 0 10px 36px rgba(217,195,134,.12);
+/* ======================================== */
+/*            QUICK LINKS FIX               */
+/* ======================================== */
+
+.quick-links-container{
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-inline: auto;
+  padding-top: clamp(32px, 6vh, 48px);
 }
 
-/* ====== Quotes ====== */
-.quotes{
-  background: radial-gradient(800px 400px at 50% 0%, rgba(217,195,134,.06), transparent 70%);
-  border-block: 1px solid rgba(255,255,255,.06);
-}
-.taglines{
-  list-style:none; padding:0; margin:0;
-  display:grid; gap:16px;
-}
-.taglines li{
-  background: linear-gradient(180deg, rgba(217,195,134,.12), rgba(217,195,134,.06));
-  border:1px solid rgba(217,195,134,.2);
-  border-radius: var(--radius);
-  padding: 14px 16px;
-  color: var(--fg);
-  text-align:center;
+/* ======================================== */
+/*           AUDIENCE GRID FIX              */
+/* ======================================== */
+
+.audience-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: clamp(20px, 3vw, 32px);
+  margin-inline: auto;
+  max-width: var(--maxw);
+  padding-inline: clamp(16px, 4vw, 32px);
 }
 
-/* ====== Links Section ====== */
+.card ul,
+.card p{
+  max-width: 90%;
+  margin-inline:auto;
+}
+
+/* ======================================== */
+/*                LINKS GRID                */
+/* ======================================== */
+
 .links-grid{
+  display:grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: clamp(20px, 2.5vw, 28px);
+  margin-inline:auto;
 }
+
 .link-tile{
-  display:flex; align-items:center; gap:12px;
-  text-decoration:none; color:var(--fg);
+  display:flex;
+  align-items:center;
+  gap:12px;
   border:1px solid rgba(255,255,255,.08);
   border-radius: var(--radius);
   padding:14px 16px;
   background: linear-gradient(180deg, var(--card), var(--card-2));
+  text-decoration:none;
+  color: var(--fg);
   box-shadow: 0 10px 28px var(--shadow);
 }
-.link-tile:hover{ border-color: var(--ring) }
-.link-emoji{ font-size:1.25rem }
-.link-text{ font-weight:600 }
-
-/* ====== Form ====== */
-.contact-form{
-  max-width: 760px;
+.link-tile:hover{
+  border-color:var(--ring);
 }
+
+/* ======================================== */
+/*                 FORM                     */
+/* ======================================== */
+
+.contact-form{ max-width:760px; margin-inline:auto; }
+
 .form-grid{
-  display:grid; gap:16px;
+  display:grid;
+  gap:16px;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   margin-bottom:12px;
 }
+
 .field{ display:grid; gap:6px }
 .field > span{ color:var(--muted); font-size:.95rem }
-input, textarea{
-  width:100%; color:var(--fg); background:#0e1a14; border:1px solid rgba(255,255,255,.12);
-  padding:12px 12px; border-radius:12px;
-}
-input:focus-visible, textarea:focus-visible{ outline:3px solid var(--ring); outline-offset:2px }
 
-/* ====== Footer ====== */
+input, textarea{
+  width:100%;
+  color:var(--fg);
+  background:#0e1a14;
+  border:1px solid rgba(255,255,255,.12);
+  padding:12px;
+  border-radius:12px;
+}
+
+/* ======================================== */
+/*                 FOOTER                   */
+/* ======================================== */
+
 .site-footer{
   border-top:1px solid rgba(255,255,255,.08);
   padding: 28px 0;
@@ -221,11 +295,58 @@ input:focus-visible, textarea:focus-visible{ outline:3px solid var(--ring); outl
   color:var(--muted);
 }
 
-/* ====== Accessibility ====== */
-.skip-link{
-  position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;
+/* ================================================= */
+/*             FIXED QUICK LINKS SPACING             */
+/* ================================================= */
+
+/* Make Quick Links sit lower on the page */
+.quick-links-section {
+  padding-top: 140px !important;  /* adjust to taste */
+  padding-bottom: 100px;
 }
-.skip-link:focus{
-  left:8px; top:8px; width:auto; height:auto; z-index:9999;
-  background:#000; color:#fff; padding:8px 10px; border-radius:8px;
+
+/* Make the grid center perfectly */
+.quick-links-section .links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+  justify-items: center;
+  width: 100%;
 }
+
+/* Perfectly centered link tiles */
+.link-tile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 14px 18px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: var(--fg);
+  background: linear-gradient(180deg, var(--card), var(--card-2));
+  box-shadow: 0 6px 18px var(--shadow);
+  width: 100%;
+  max-width: 420px;   /* this keeps them aligned */
+}
+
+.link-tile:hover {
+  border-color: var(--ring);
+}
+
+/* Fix form width and alignment */
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contact-form input,
+.contact-form textarea {
+  max-width: 100%;
+  width: 100%;
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 1rem;
+}
+
